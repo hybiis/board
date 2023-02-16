@@ -1,15 +1,29 @@
 package com.board.board.controller;
 
+import com.board.board.entity.Board;
+import com.board.board.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class boardcontroller {
-    @GetMapping("/")
-    @ResponseBody
-    public static String main(String[] args) {
+    @Autowired
+    private BoardService boardService;
 
-        return "helloworld";
+    @GetMapping("/board/write")
+    public  String boardWriteForm() {
+
+        return "boardwrite";
+    }
+    @PostMapping("/board/writepro")
+    public String boardwritePro(Board board){
+
+        boardService.write(board);
+
+        return  "";
+
     }
 }
